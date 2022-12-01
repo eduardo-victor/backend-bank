@@ -72,3 +72,6 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+# class Transference(models.Model):
+#     user = models.ForeignKey(User)

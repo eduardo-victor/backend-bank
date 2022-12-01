@@ -42,3 +42,6 @@ class LoginAPIView(GenericAPIView):
             serializer = self.serializer_class(user)
             return response.Response(serializer.data, status=status.HTTP_200_OK)
         return response.Response({'message': 'Invalid credentials'}, status=status.HTTP_401_UNAUTHORIZED)
+
+# class TransferAPIView(GenericAPIView):
+    
