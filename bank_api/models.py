@@ -3,6 +3,7 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.conf import settings
 from datetime import datetime, timedelta
+from random import randint
 import jwt
 
 
@@ -32,11 +33,27 @@ class User(AbstractUser):
     cpf = models.CharField(max_length=14, unique=True)
     email = models.CharField(max_length=80, unique=True)
     wage = models.DecimalField(max_digits=9, decimal_places=2)
+    # Account settings
     agency = models.CharField(max_length=6, editable=False)
+    balance = models.DecimalField(max_digits=9, decimal_places=2)
+
 
     objects = CustomUserManager()
     USERNAME_FIELD = "cpf"
     REQUIRED_FIELDS = ["username", "email", "wage", "password"]
+
+    @property
+    def number(self):
+        cpf = self.cpf
+        number_account = ""
+        for i in cpf:
+            number_account += i
+            if len(number_account) == 7:
+                break
+        number_account = number_account.replace(".", "0")
+        number_final = number_account+"-"+"0"
+        return number_final
+
 
     @property
     def token(self):
@@ -50,6 +67,8 @@ class User(AbstractUser):
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token
+
+
 
     def __str__(self):
         return self.username
