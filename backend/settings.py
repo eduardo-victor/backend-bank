@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-4-&_xkgys3#0ak@l@uto%y91=2yzrvgk6tt@aes0asg#4)ua62
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 AUTH_USER_MODEL="bank_api.User"
 
